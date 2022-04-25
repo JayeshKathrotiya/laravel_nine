@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/todos', [TodoController::class, 'index']);
-Route::get('/todos/create', [TodoController::class, 'create']);
-Route::get('/todos/edit', [TodoController::class, 'edit']);
+// Route::middleware('auth')->group(function(){
+    Route::resource('/todo', TodoController::class);
+    Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+    Route::delete('/todos/{todo}/incomplete', [TodoController::class, 'incomplete'])->name('todo.incomplete');
+// });
+
 
 Route::get('/', function () {
     return view('welcome');
